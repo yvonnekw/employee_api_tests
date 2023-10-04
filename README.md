@@ -10,7 +10,9 @@ http://dummy.restapiexample.com/api/v1
 Right click the any test cases and run with java.
 
 ### server to use
-employee_Db.json server
+employee_Db.json server.
+Download the json server here -
 
+git@github.com:yvonnekw/local_json_servers.git
 
 
