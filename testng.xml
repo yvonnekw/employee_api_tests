@@ -7,7 +7,8 @@
 	</listeners>
 	<test name="employee">
 		<classes>
-			<class name="test_scripts.Employee_post"/>
+			<class name="test_scripts.CreateEmployee"/>
+			<class name="test_scripts.GetEmployee"/>
 		</classes>
 	
 	</test>
