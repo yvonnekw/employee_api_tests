@@ -7,9 +7,7 @@ import objects.Employee;
 public class Test_data_employee {
 
 public static Employee employee_test_data(){
-
     Faker faker = new Faker();
-
     Employee employee = new Employee();
     employee.setEmployee_name(faker.name().fullName());
     employee.setEmployee_salary(faker.number().numberBetween(40000, 100000));
@@ -18,7 +16,6 @@ public static Employee employee_test_data(){
     return employee;
 }
     public static Employee partially_update_employee_test_data(){
-
         Faker faker = new Faker();
         Employee employee = new Employee();
         employee.setEmployee_name(faker.name().fullName());
