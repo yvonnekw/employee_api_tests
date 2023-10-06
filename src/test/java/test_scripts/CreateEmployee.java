@@ -1,21 +1,16 @@
 package test_scripts;
 
+import base.TestBase;
+import org.testng.Assert;
 import org.testng.annotations.Test;
-import utilities.CommonSpec;
-import utilities.Properties;
-import static io.restassured.RestAssured.given;
-import static utilities.Test_data_employee.test_data;
+import static utilities.Requests.createEmployeeReturnId;
 
-public class CreateEmployee {
+public class CreateEmployee extends TestBase {
 
     @Test
     void create_employee(){
-        given()
-                .spec(CommonSpec.basicCommonHeader())
-                .body(test_data())
-                .when()
-                .post(Properties.baseUrl + Properties.basePath)
-                .then().statusCode(201).log().all();
+        logger.info("********* staring test to create a new employee  ********** ");
+        String employeeId =  createEmployeeReturnId();
+        Assert.assertNotEquals(employeeId, null);
     }
-
 }
