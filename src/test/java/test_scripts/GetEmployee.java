@@ -2,7 +2,11 @@ package test_scripts;
 
 
 import base.TestBase;
+
+import com.google.gson.Gson;
+import io.restassured.module.jsv.JsonSchemaValidator;
 import io.restassured.response.Response;
+import objects.Employee;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import utilities.CommonSpec;
@@ -77,4 +81,30 @@ public class GetEmployee extends TestBase {
         Assert.assertTrue(responseBody.contains(employee_name), "Response body contains " + employee_name);
     }
 
+    @Test
+    void validate_employees_data(){
+        logger.info("********* staring test for the validate_employees_data  ********** ");
+        createEmployeeReturnId();
+                given()
+                .spec(CommonSpec.basicCommonHeader())
+                .when()
+                .get(Properties.baseUrl + Properties.basePath)
+                        .then()
+                        .assertThat().body(JsonSchemaValidator.matchesJsonSchemaInClasspath("json_schema.json"));
+    }
+
+    @Test
+    void validate_employee_salary(){
+        logger.info("********* staring test for the validate_employees_data  ********** ");
+        String employeeId = createEmployeeReturnId();
+        Response response = given()
+                .spec(CommonSpec.basicCommonHeader())
+                .when()
+                .get(Properties.baseUrl + Properties.basePath + employeeId);
+        response.then().statusCode(200);
+        Employee employee = response.as(Employee.class);
+        Assert.assertTrue(employee.getEmployee_salary() > 0);
+        Assert.assertTrue(employee.getEmployee_salary() < 100000);
+
+    }
 }
